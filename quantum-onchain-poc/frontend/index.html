@@ -13,48 +13,49 @@
 
   <!-- Ethers.js v6 CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.1/ethers.umd.min.js"></script>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
   <style>
     /* ========================================================================
        DESIGN TOKENS
        ======================================================================== */
     :root {
-      /* Core palette — institutional slate + accent cyan */
-      --bg-primary: #0a0e17;
-      --bg-secondary: #111827;
-      --bg-card: rgba(17, 24, 39, 0.65);
-      --bg-card-hover: rgba(22, 32, 55, 0.80);
-      --bg-glass: rgba(15, 23, 42, 0.55);
-      --border-subtle: rgba(100, 116, 139, 0.18);
-      --border-active: rgba(56, 189, 248, 0.35);
+      --bg-primary: #0a1a0f;
+      --bg-secondary: #0f2416;
+      --bg-card: rgba(255,255,255,0.04);
+      --bg-card-hover: rgba(255,255,255,0.07);
+      --bg-glass: rgba(10,26,15,0.8);
+      --border-subtle: rgba(255,255,255,0.09);
+      --border-active: rgba(126,184,122,0.4);
 
-      --text-primary: #f1f5f9;
-      --text-secondary: #94a3b8;
-      --text-muted: #64748b;
+      --text-primary: #f0f4f0;
+      --text-secondary: #8aab8a;
+      --text-muted: #567056;
 
-      --accent-cyan: #38bdf8;
-      --accent-cyan-dim: rgba(56, 189, 248, 0.15);
-      --accent-emerald: #34d399;
-      --accent-emerald-dim: rgba(52, 211, 153, 0.12);
-      --accent-amber: #fbbf24;
-      --accent-amber-dim: rgba(251, 191, 36, 0.12);
-      --accent-violet: #a78bfa;
-      --accent-violet-dim: rgba(167, 139, 250, 0.12);
-      --accent-rose: #fb7185;
-      --accent-rose-dim: rgba(251, 113, 133, 0.12);
+      --accent-cyan: #7eb87a;
+      --accent-cyan-dim: rgba(126,184,122,0.12);
+      --accent-emerald: #5ecb6f;
+      --accent-emerald-dim: rgba(94,203,111,0.12);
+      --accent-amber: #e8b84b;
+      --accent-amber-dim: rgba(232,184,75,0.12);
+      --accent-violet: #7eb87a;
+      --accent-violet-dim: rgba(126,184,122,0.10);
+      --accent-rose: #e07070;
+      --accent-rose-dim: rgba(224,112,112,0.12);
 
-      --success: #22c55e;
-      --warning: #f59e0b;
-      --error: #ef4444;
+      --success: #5ecb6f;
+      --warning: #e8b84b;
+      --error: #e07070;
 
       --radius-sm: 8px;
       --radius-md: 12px;
       --radius-lg: 16px;
       --radius-xl: 20px;
 
-      --shadow-card: 0 4px 32px rgba(0, 0, 0, 0.35), 0 0 0 1px var(--border-subtle);
-      --shadow-glow-cyan: 0 0 40px rgba(56, 189, 248, 0.08);
-      --shadow-glow-emerald: 0 0 40px rgba(52, 211, 153, 0.06);
+      --shadow-card: 0 4px 32px rgba(0,0,0,0.4), 0 0 0 1px var(--border-subtle);
+      --shadow-glow-cyan: 0 0 60px rgba(126,184,122,0.06);
+      --shadow-glow-emerald: 0 0 40px rgba(94,203,111,0.05);
 
       --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
@@ -92,7 +93,7 @@
       left: -20%;
       width: 70%;
       height: 70%;
-      background: radial-gradient(ellipse at center, rgba(56, 189, 248, 0.04) 0%, transparent 70%);
+      background: radial-gradient(ellipse at center, rgba(126,184,122,0.04) 0%, transparent 70%);
       pointer-events: none;
       z-index: 0;
     }
@@ -103,7 +104,7 @@
       right: -15%;
       width: 60%;
       height: 60%;
-      background: radial-gradient(ellipse at center, rgba(167, 139, 250, 0.03) 0%, transparent 70%);
+      background: radial-gradient(ellipse at center, rgba(126,184,122,0.04) 0%, transparent 70%);
       pointer-events: none;
       z-index: 0;
     }
@@ -114,10 +115,9 @@
     .grid-bg {
       position: fixed;
       inset: 0;
-      background-image:
-        linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
-      background-size: 60px 60px;
+      background-image: radial-gradient(rgba(126,184,122,0.5) 1px, transparent 1px);
+      background-size: 24px 24px;
+      opacity: 0.25;
       z-index: 0;
       pointer-events: none;
     }
@@ -160,15 +160,15 @@
       width: 42px;
       height: 42px;
       border-radius: var(--radius-sm);
-      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-violet));
+      background: #7eb87a;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 20px;
       font-weight: 800;
-      color: #fff;
+      color: #0a1a0f;
       letter-spacing: -1px;
-      box-shadow: 0 0 24px rgba(56, 189, 248, 0.25);
+      box-shadow: 0 0 24px rgba(126, 184, 122, 0.25);
     }
 
     .brand-text h1 {
@@ -195,7 +195,7 @@
       gap: 8px;
       padding: 8px 16px;
       background: var(--accent-cyan-dim);
-      border: 1px solid rgba(56, 189, 248, 0.20);
+      border: 1px solid rgba(126, 184, 122, 0.20);
       border-radius: 999px;
       font-size: 12px;
       font-weight: 600;
@@ -212,8 +212,8 @@
     }
 
     @keyframes pulse-dot {
-      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.5); }
-      50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(56, 189, 248, 0); }
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(126, 184, 122, 0.5); }
+      50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(126, 184, 122, 0); }
     }
 
     /* ========================================================================
@@ -302,7 +302,7 @@
       align-items: center;
       justify-content: center;
       font-size: 20px;
-      box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+      box-shadow: 0 0 20px rgba(126, 184, 122, 0.2);
     }
 
     .wallet-details .label {
@@ -342,7 +342,7 @@
     .status-chip.connected {
       background: var(--accent-emerald-dim);
       color: var(--accent-emerald);
-      border: 1px solid rgba(52, 211, 153, 0.2);
+      border: 1px solid rgba(94, 203, 111, 0.2);
     }
 
     .status-chip.disconnected {
@@ -380,14 +380,16 @@
     .btn:hover::after { opacity: 1; }
 
     .btn-primary {
-      background: linear-gradient(135deg, #0ea5e9, #38bdf8);
-      color: #fff;
-      box-shadow: 0 4px 16px rgba(14, 165, 233, 0.3);
+      background: #7eb87a;
+      color: #0a1a0f;
+      font-weight: 600;
+      box-shadow: 0 4px 16px rgba(126, 184, 122, 0.3);
     }
 
     .btn-primary:hover {
+      background: #6aaa66;
       transform: translateY(-1px);
-      box-shadow: 0 6px 24px rgba(14, 165, 233, 0.4);
+      box-shadow: 0 6px 24px rgba(126, 184, 122, 0.4);
     }
 
     .btn-primary:active { transform: translateY(0); }
@@ -404,20 +406,517 @@
     }
 
     .btn-query {
-      background: linear-gradient(135deg, #059669, #34d399);
-      color: #fff;
-      box-shadow: 0 4px 16px rgba(5, 150, 105, 0.3);
+      background: #7eb87a;
+      color: #0a1a0f;
+      font-weight: 600;
+      box-shadow: 0 4px 16px rgba(126, 184, 122, 0.3);
     }
 
     .btn-query:hover {
+      background: #6aaa66;
       transform: translateY(-1px);
-      box-shadow: 0 6px 24px rgba(5, 150, 105, 0.4);
+      box-shadow: 0 6px 24px rgba(126, 184, 122, 0.4);
     }
 
     .btn:disabled {
       opacity: 0.5;
       cursor: not-allowed;
       transform: none !important;
+    }
+
+    /* ========================================================================
+       MAIN GRID
+       ======================================================================== */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    @media (max-width: 860px) {
+      .main-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ========================================================================
+       TOKEN METADATA TABLE
+       ======================================================================== */
+    .meta-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .meta-table tr {
+      border-bottom: 1px solid var(--border-subtle);
+      transition: background var(--transition-base);
+    }
+
+    .meta-table tr:last-child { border-bottom: none; }
+
+    .meta-table tr:hover { background: rgba(126, 184, 122, 0.03); }
+
+    .meta-table td {
+      padding: 14px 0;
+      font-size: 13px;
+    }
+
+    .meta-table .field-label {
+      color: var(--text-muted);
+      font-weight: 500;
+      width: 160px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .meta-table .field-value {
+      color: var(--text-primary);
+      font-weight: 500;
+      font-family: var(--font-mono);
+      font-size: 13px;
+    }
+
+    .meta-table .field-value.highlight {
+      color: var(--accent-cyan);
+    }
+
+    /* ========================================================================
+       FINANCIAL SNAPSHOT PANEL
+       ======================================================================== */
+    .financial-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .metric-card {
+      padding: 20px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+      background: rgba(15, 23, 42, 0.5);
+      transition: all var(--transition-base);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .metric-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      border-radius: 2px 2px 0 0;
+      opacity: 0;
+      transition: opacity var(--transition-base);
+    }
+
+    .metric-card:hover::before { opacity: 1; }
+    .metric-card:hover {
+      border-color: var(--border-active);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
+
+    .metric-card.noi::before { background: var(--accent-cyan); }
+    .metric-card.occ::before { background: var(--accent-emerald); }
+    .metric-card.dscr::before { background: var(--accent-amber); }
+    .metric-card.cf::before { background: var(--accent-violet); }
+
+    .metric-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .metric-label .metric-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+
+    .metric-value {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .metric-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .metric-card.noi .metric-value { color: var(--accent-cyan); }
+    .metric-card.noi .metric-dot { background: var(--accent-cyan); }
+    .metric-card.occ .metric-value { color: var(--accent-emerald); }
+    .metric-card.occ .metric-dot { background: var(--accent-emerald); }
+    .metric-card.dscr .metric-value { color: var(--accent-amber); }
+    .metric-card.dscr .metric-dot { background: var(--accent-amber); }
+    .metric-card.cf .metric-value { color: var(--accent-violet); }
+    .metric-card.cf .metric-dot { background: var(--accent-violet); }
+
+    /* ========================================================================
+       TIMESTAMP VERIFICATION STRIP
+       ======================================================================== */
+    .timestamp-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 20px;
+      padding: 14px 18px;
+      background: var(--accent-emerald-dim);
+      border: 1px solid rgba(94, 203, 111, 0.18);
+      border-radius: var(--radius-md);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--accent-emerald);
+    }
+
+    .timestamp-bar .ts-icon {
+      font-size: 16px;
+    }
+
+    .timestamp-bar .ts-mono {
+      font-family: var(--font-mono);
+      font-weight: 600;
+    }
+
+    /* ========================================================================
+       EMPTY / LOADING STATES
+       ======================================================================== */
+    .empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 24px;
+      text-align: center;
+      gap: 12px;
+    }
+
+    .empty-state .empty-icon {
+      font-size: 40px;
+      opacity: 0.4;
+      margin-bottom: 4px;
+    }
+
+    .empty-state p {
+      color: var(--text-muted);
+      font-size: 13px;
+      max-width: 280px;
+      line-height: 1.6;
+    }
+
+    /* Skeleton loading animation */
+    .skeleton {
+      background: linear-gradient(90deg,
+        rgba(100, 116, 139, 0.08) 25%,
+        rgba(100, 116, 139, 0.15) 50%,
+        rgba(100, 116, 139, 0.08) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s ease-in-out infinite;
+      border-radius: var(--radius-sm);
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    .skeleton-line {
+      height: 16px;
+      margin-bottom: 12px;
+      width: 100%;
+    }
+
+    .skeleton-line.short { width: 60%; }
+    .skeleton-line.medium { width: 80%; }
+
+    /* ========================================================================
+       QUERY SECTION
+       ======================================================================== */
+    .query-section {
+      margin-bottom: 28px;
+    }
+
+    .query-bar {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .query-bar .query-info {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .query-bar .query-info code {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--accent-cyan);
+      background: var(--accent-cyan-dim);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    /* ========================================================================
+       FOOTER
+       ======================================================================== */
+    .footer {
+      text-align: center;
+      padding: 32px 0;
+      border-top: 1px solid var(--border-subtle);
+      margin-top: 40px;
+    }
+
+    .footer p {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .footer a {
+      color: var(--accent-cyan);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .footer a:hover { text-decoration: underline; }
+
+    /* ========================================================================
+       ANIMATIONS
+       ======================================================================== */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate-in {
+      animation: fadeInUp 0.5s ease-out forwards;
+      opacity: 0;
+    }
+
+    .animate-in.d1 { animation-delay: 0.05s; }
+    .animate-in.d2 { animation-delay: 0.12s; }
+    .animate-in.d3 { animation-delay: 0.20s; }
+    .animate-in.d4 { animation-delay: 0.28s; }
+    .animate-in.d5 { animation-delay: 0.36s; }
+
+    /* Spinner for loading */
+    .spinner {
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      display: inline-block;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ========================================================================
+       TRANSACTION LOG SECTION
+       ======================================================================== */
+    .tx-log {
+      margin-top: 20px;
+      padding: 16px 20px;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-muted);
+      max-height: 160px;
+      overflow-y: auto;
+      line-height: 1.8;
+    }
+
+    .tx-log .log-entry {
+      padding: 2px 0;
+    }
+
+    .tx-log .log-entry .ts {
+      color: var(--text-muted);
+      margin-right: 8px;
+    }
+
+    .tx-log .log-entry.success { color: var(--accent-emerald); }
+    .tx-log .log-entry.info { color: var(--accent-cyan); }
+    .tx-log .log-entry.warn { color: var(--accent-amber); }
+    .tx-log .log-entry.error { color: var(--accent-rose); }
+
+    /* ========================================================================
+       FULL WIDTH
+       ======================================================================== */
+    .full-width { grid-column: 1 / -1; }
+
+    /* Scrollbar styling */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border-subtle); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+    /* ========================================================================
+       iBANKA CHAT WIDGET STYLES
+       ======================================================================== */
+    #ibankaTrigger {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 56px;
+      height: 56px;
+      z-index: 9999;
+      background: #7eb87a;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 8px 32px rgba(126, 184, 122, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      transition: transform var(--transition-spring), background var(--transition-base);
+    }
+    #ibankaTrigger:hover {
+      transform: scale(1.05);
+      background: #6aaa66;
+    }
+    #ibankaPanel {
+      position: fixed;
+      bottom: 88px;
+      right: 24px;
+      width: 370px;
+      height: 490px;
+      background: #0f2416;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.55);
+      z-index: 9998;
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      font-family: var(--font-sans);
+    }
+    #ibankaInput {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      padding: 10px 16px;
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: 13px;
+      outline: none;
+      transition: all var(--transition-base);
+    }
+    #ibankaInput:focus {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--border-active);
+    }
+    #ibankaMessages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .ib-bubble-user {
+      align-self: flex-end;
+      background: rgba(126, 184, 122, 0.15);
+      border-radius: 16px 16px 4px 16px;
+      padding: 10px 14px;
+      max-width: 78%;
+      font-size: 13px;
+      color: var(--text-primary);
+      line-height: 1.5;
+    }
+    .ib-bubble-assistant {
+      align-self: flex-start;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px 16px 16px 4px;
+      padding: 12px 14px;
+      max-width: 88%;
+      font-size: 13px;
+      color: var(--text-primary);
+      line-height: 1.5;
+    }
+    .ib-mini-cards {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+    .ib-mini-card {
+      background: rgba(255, 255, 255, 0.07);
+      border: none;
+      border-radius: 10px;
+      padding: 10px 12px;
+      min-width: 90px;
+      flex: 1;
+    }
+    .ib-mini-card .label {
+      font-size: 10px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 4px;
+    }
+    .ib-mini-card .val {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    .ib-typing {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      padding: 6px 0;
+    }
+    .ib-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #7eb87a;
+      animation: ibDotBounce 1s infinite;
+    }
+    @keyframes ibDotBounce {
+      0%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-6px); }
+    }
+    .ib-dot:nth-child(2) { animation-delay: 0.15s; }
+    .ib-dot:nth-child(3) { animation-delay: 0.3s; }
+    div.ib-chip {
+      display: inline-block;
+      margin-top: 4px;
+      padding: 6px 14px;
+      border: 1px solid rgba(126, 184, 122, 0.4);
+      border-radius: 20px;
+      font-size: 12px;
+      color: #7eb87a;
+      cursor: pointer;
+      transition: all var(--transition-base);
+      max-width: fit-content;
+    }
+    div.ib-chip:hover {
+      background: rgba(126, 184, 122, 0.1);
+      border-color: rgba(126, 184, 122, 0.6);
     }
 
     /* ========================================================================
@@ -779,10 +1278,10 @@
     <!-- ===== TOP BAR ===== -->
     <header class="top-bar animate-in d1" id="topBar">
       <div class="brand">
-        <div class="brand-icon">Q</div>
-        <div class="brand-text">
-          <h1>Quantum</h1>
-          <span>Institutional RWA Terminal</span>
+        <img src="assets/logo.svg" alt="Claira Logo" style="height: 32px; width: auto; display: block;" />
+        <div class="brand-text" style="border-left: 1px solid var(--border-subtle); padding-left: 14px; margin-left: 4px;">
+          <h1 style="font-size: 18px; font-weight: 700; color: var(--text-primary);">Quantum</h1>
+          <span style="font-size: 11px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.2px;">Institutional RWA Terminal</span>
         </div>
       </div>
       <div class="network-badge">
@@ -881,6 +1380,45 @@
 
     </div>
 
+    <!-- ===== HISTORICAL PERFORMANCE CHART ===== -->
+    <section class="card animate-in" id="chartSection" style="margin-top:0;">
+      <div class="section-header">
+        <div class="icon-box" style="background:var(--accent-cyan-dim); color:var(--accent-cyan);">📈</div>
+        <h2>Historical Performance</h2>
+        <span class="tag" style="background:var(--accent-cyan-dim); color:var(--accent-cyan);">8Q TREND</span>
+      </div>
+      <div style="position:relative; height:280px; width:100%;">
+        <canvas id="perfChart"></canvas>
+      </div>
+    </section>
+
+    <!-- ===== COMPARABLES & RISK TABLE ===== -->
+    <section class="card animate-in" id="comparablesSection" style="margin-top:0;">
+      <div class="section-header">
+        <div class="icon-box" style="background:var(--accent-amber-dim); color:var(--accent-amber);">📉</div>
+        <h2>Market Comparables &amp; Risk Benchmark</h2>
+        <span class="tag" style="background:var(--accent-amber-dim); color:var(--accent-amber);">BENCHMARK</span>
+      </div>
+      <div style="overflow-x:auto;">
+        <table class="meta-table" style="width:100%; border-collapse:separate; border-spacing:0;">
+          <thead>
+            <tr>
+              <th style="padding:10px 14px; text-align:left; color:var(--text-muted); font-size:11px; font-weight:600; letter-spacing:0.08em; border-bottom:1px solid var(--border-subtle);">ASSET</th>
+              <th style="padding:10px 14px; text-align:left; color:var(--text-muted); font-size:11px; font-weight:600; letter-spacing:0.08em; border-bottom:1px solid var(--border-subtle);">MARKET</th>
+              <th style="padding:10px 14px; text-align:right; color:var(--text-muted); font-size:11px; font-weight:600; letter-spacing:0.08em; border-bottom:1px solid var(--border-subtle);">CAP RATE</th>
+              <th style="padding:10px 14px; text-align:right; color:var(--text-muted); font-size:11px; font-weight:600; letter-spacing:0.08em; border-bottom:1px solid var(--border-subtle);">DSCR</th>
+              <th style="padding:10px 14px; text-align:right; color:var(--text-muted); font-size:11px; font-weight:600; letter-spacing:0.08em; border-bottom:1px solid var(--border-subtle);">OCCUPANCY</th>
+              <th style="padding:10px 14px; text-align:center; color:var(--text-muted); font-size:11px; font-weight:600; letter-spacing:0.08em; border-bottom:1px solid var(--border-subtle);">RISK SCORE</th>
+              <th style="padding:10px 14px; text-align:center; color:var(--text-muted); font-size:11px; font-weight:600; letter-spacing:0.08em; border-bottom:1px solid var(--border-subtle);">STATUS</th>
+            </tr>
+          </thead>
+          <tbody id="comparablesBody">
+            <!-- Populated by JS -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
     <!-- ===== FOOTER ===== -->
     <footer class="footer">
       <p>
@@ -919,6 +1457,88 @@
     let connectedAddress = null;
     let provider = null;
     let signer = null;
+
+    window._lastSnapshot = null;
+    window._lastTokenId = "1";
+    window._perfChart = null;
+
+    // Historical mock data per token (8 quarters: Q1 2024 → Q4 2025)
+    const CHART_LABELS = ["Q1 2024","Q2 2024","Q3 2024","Q4 2024","Q1 2025","Q2 2025","Q3 2025","Q4 2025"];
+    const CHART_DATA = {
+      "1": { noi: [380000,395000,408000,415000,422000,435000,442000,450000], occ: [88,89,90,91,92,93,94,94.5] },
+      "2": { noi: [210000,225000,238000,248000,258000,268000,278000,290000], occ: [82,83,84,85,86,87,89,91] },
+      "3": { noi: [155000,162000,168000,174000,180000,186000,192000,198000], occ: [75,78,80,82,83,84,86,87] },
+    };
+
+    function updateChart() {
+      const canvas = document.getElementById("perfChart");
+      if (!canvas) return;
+      const tokenKey = window._lastTokenId || "1";
+      const d = CHART_DATA[tokenKey] || CHART_DATA["1"];
+
+      if (window._perfChart) { window._perfChart.destroy(); window._perfChart = null; }
+
+      window._perfChart = new Chart(canvas, {
+        type: "line",
+        data: {
+          labels: CHART_LABELS,
+          datasets: [
+            {
+              label: "Net Operating Income ($)",
+              data: d.noi,
+              borderColor: "#38bdf8",
+              backgroundColor: "transparent",
+              borderWidth: 2,
+              pointBackgroundColor: "#38bdf8",
+              pointRadius: 4,
+              tension: 0.4,
+              yAxisID: "yNOI",
+            },
+            {
+              label: "Occupancy (%)",
+              data: d.occ,
+              borderColor: "#34d399",
+              backgroundColor: "transparent",
+              borderWidth: 2,
+              borderDash: [6, 3],
+              pointBackgroundColor: "#34d399",
+              pointRadius: 4,
+              tension: 0.4,
+              yAxisID: "yOcc",
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: { mode: "index", intersect: false },
+          plugins: {
+            legend: { position: "top", labels: { color: "#94a3b8", font: { family: "Inter", size: 12 } } },
+            tooltip: {
+              backgroundColor: "rgba(17,24,39,0.95)",
+              borderColor: "rgba(100,116,139,0.3)",
+              borderWidth: 1,
+              titleColor: "#f1f5f9",
+              bodyColor: "#94a3b8",
+            },
+          },
+          scales: {
+            x: { ticks: { color: "#64748b", font: { family: "Inter", size: 11 } }, grid: { color: "rgba(100,116,139,0.1)" } },
+            yNOI: {
+              position: "left",
+              ticks: { color: "#38bdf8", font: { family: "Inter", size: 11 }, callback: v => "$" + (v/1000).toFixed(0) + "k" },
+              grid: { color: "rgba(100,116,139,0.1)" },
+            },
+            yOcc: {
+              position: "right",
+              ticks: { color: "#34d399", font: { family: "Inter", size: 11 }, callback: v => v + "%" },
+              grid: { drawOnChartArea: false },
+              min: 60, max: 100,
+            },
+          },
+        },
+      });
+    }
 
     // Initialize the contract badge
     document.addEventListener("DOMContentLoaded", () => {
@@ -1057,6 +1677,7 @@
       try {
         const contract = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, provider);
         const tokenId = document.getElementById("tokenIdSelect").value;
+        window._lastTokenId = tokenId;
 
         // === 1. Read Token URI ===
         log(`Calling tokenURI(${tokenId}) on contract…`, "info");
@@ -1090,6 +1711,8 @@
 
         // === Render Financial Data ===
         renderFinancials({ noi, occupancy, dscr, cashflow, timestamp, assetId });
+        updateChart();
+        renderComparables();
 
       } catch (err) {
         log(`Query failed: ${err.message}`, "error");
@@ -1160,8 +1783,47 @@
       });
     }
 
+    const COMPARABLES = [
+      { asset: "QM1-001 Hotel Feeling",       market: "Bogotá, CO",   cap: "6.8%", dscr: "1.35x", occ: "94.5%", risk: 2.1, status: "Active",    tokenId: "1" },
+      { asset: "QM1-002 Plaza Alcalá",        market: "Medellín, CO", cap: "7.2%", dscr: "1.28x", occ: "91.0%", risk: 2.4, status: "Active",    tokenId: "2" },
+      { asset: "QM1-003 Bodega JHC",          market: "Bogotá, CO",   cap: "8.1%", dscr: "1.19x", occ: "87.0%", risk: 2.8, status: "Active",    tokenId: "3" },
+      { asset: "Comparable A — Office Hub",   market: "Miami, FL",    cap: "6.2%", dscr: "1.18x", occ: "88.0%", risk: 3.1, status: "Reference", tokenId: null },
+      { asset: "Comparable B — Mixed-Use",    market: "Bogotá, CO",   cap: "7.5%", dscr: "1.10x", occ: "82.0%", risk: 3.6, status: "Reference", tokenId: null },
+      { asset: "Comparable C — Hospitality",  market: "Lima, PE",     cap: "8.8%", dscr: "0.98x", occ: "76.0%", risk: 4.2, status: "Reference", tokenId: null },
+    ];
+
+    function riskBadge(score) {
+      let color = score <= 2.5 ? "var(--accent-emerald)" : score <= 3.5 ? "var(--accent-amber)" : "var(--accent-rose)";
+      let bg    = score <= 2.5 ? "var(--accent-emerald-dim)" : score <= 3.5 ? "var(--accent-amber-dim)" : "var(--accent-rose-dim)";
+      return `<span style="display:inline-block;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:600;background:${bg};color:${color};">${score.toFixed(1)}</span>`;
+    }
+
+    function renderComparables() {
+      const tbody = document.getElementById("comparablesBody");
+      if (!tbody) return;
+      const activeId = window._lastTokenId || "1";
+      tbody.innerHTML = COMPARABLES.map(row => {
+        const isActive = row.tokenId === activeId;
+        const rowStyle = isActive
+          ? "border-left:3px solid var(--accent-cyan); background:var(--accent-cyan-dim);"
+          : "border-left:3px solid transparent;";
+        const tdStyle = "padding:11px 14px; font-size:13px; border-bottom:1px solid var(--border-subtle);";
+        const statusDot = row.status === "Active" ? `<span style="color:var(--accent-emerald);">●</span>` : `<span style="color:var(--text-muted);">○</span>`;
+        return `<tr style="${rowStyle}">
+          <td style="${tdStyle} font-weight:${isActive ? 600 : 400}; color:var(--text-primary);">${row.asset}</td>
+          <td style="${tdStyle} color:var(--text-secondary);">${row.market}</td>
+          <td style="${tdStyle} text-align:right; font-family:var(--font-mono); color:var(--text-primary);">${row.cap}</td>
+          <td style="${tdStyle} text-align:right; font-family:var(--font-mono); color:var(--text-primary);">${row.dscr}</td>
+          <td style="${tdStyle} text-align:right; font-family:var(--font-mono); color:var(--text-primary);">${row.occ}</td>
+          <td style="${tdStyle} text-align:center;">${riskBadge(row.risk)}</td>
+          <td style="${tdStyle} text-align:center; color:var(--text-secondary);">${statusDot} ${row.status}</td>
+        </tr>`;
+      }).join("");
+    }
+
     function renderFinancials(data) {
       const { noi, occupancy, dscr, cashflow, timestamp, assetId } = data;
+      window._lastSnapshot = { noi, occupancy, dscr, cashflow, assetId };
 
       const verifiedDate = new Date(timestamp * 1000);
       const formattedDate = verifiedDate.toLocaleDateString("en-US", {
@@ -1202,6 +1864,112 @@
           <span style="margin-left:auto; opacity:0.7;">Block Timestamp: ${timestamp}</span>
         </div>`;
     }
+  </script>
+
+  <!-- ======================================================================
+       iBANKA FLOATING CHAT WIDGET
+       ====================================================================== -->
+  <button id="ibankaTrigger" title="iBanka AI Assistant">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+    </svg>
+  </button>
+
+  <div id="ibankaPanel">
+    <div class="ibanka-header" style="padding: 16px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: space-between;">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <strong style="color: #fff; font-weight: 700; font-size: 15px;">iBanka</strong>
+        <span style="color: var(--text-muted); font-size: 13px;">&middot; Financial AI</span>
+        <span style="border: 1px solid #7eb87a; color: #7eb87a; font-size: 10px; padding: 2px 8px; border-radius: 20px; font-weight: 600;">BETA</span>
+      </div>
+      <button id="ibankaClose" style="color: var(--text-muted); font-size: 18px; cursor: pointer; background: none; border: none; outline: none; line-height: 1;">&times;</button>
+    </div>
+    
+    <div id="ibankaMessages"></div>
+    
+    <div style="padding: 12px 16px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; gap: 8px; align-items: center;">
+      <input type="text" id="ibankaInput" placeholder="Ask about portfolio assets..." />
+      <button id="ibankaSend" title="Send message">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="22" y1="2" x2="11" y2="13"></line>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const trigger = document.getElementById('ibankaTrigger');
+      const panel   = document.getElementById('ibankaPanel');
+      const close   = document.getElementById('ibankaClose');
+      const msgs    = document.getElementById('ibankaMessages');
+      const input   = document.getElementById('ibankaInput');
+      const send    = document.getElementById('ibankaSend');
+
+      function addBubble(html, role) {
+        const d = document.createElement('div');
+        d.className = role === 'user' ? 'ib-bubble-user' : 'ib-bubble-assistant';
+        d.innerHTML = html;
+        msgs.appendChild(d);
+        msgs.scrollTop = msgs.scrollHeight;
+        return d;
+      }
+
+      function initWelcome() {
+        addBubble('Hello! I\'m <strong>iBanka</strong>, your financial AI for Quantum assets. Ask me anything about the portfolio.', 'assistant');
+        const chip = document.createElement('div');
+        chip.className = 'ib-chip';
+        chip.textContent = 'How is Quantum M1 doing this quarter?';
+        chip.onclick = () => { input.value = chip.textContent; input.focus(); };
+        msgs.appendChild(chip);
+      }
+
+      trigger.onclick = () => {
+        const isOpen = panel.style.display === 'flex';
+        panel.style.display = isOpen ? 'none' : 'flex';
+        panel.style.flexDirection = 'column';
+        if (!isOpen && msgs.children.length === 0) initWelcome();
+      };
+      close.onclick = () => { panel.style.display = 'none'; };
+
+      function respond() {
+        const text = input.value.trim();
+        if (!text) return;
+        input.value = '';
+        addBubble(text, 'user');
+
+        const typingEl = document.createElement('div');
+        typingEl.className = 'ib-bubble-assistant';
+        typingEl.innerHTML = '<div class="ib-typing"><div class="ib-dot"></div><div class="ib-dot"></div><div class="ib-dot"></div></div>';
+        msgs.appendChild(typingEl);
+        msgs.scrollTop = msgs.scrollHeight;
+
+        setTimeout(() => {
+          msgs.removeChild(typingEl);
+          const snap = window._lastSnapshot;
+          if (!snap) {
+            addBubble('Please query an asset first to unlock financial insights.', 'assistant');
+            return;
+          }
+          const noiF = '$' + snap.noi.toLocaleString('en-US', {minimumFractionDigits:2});
+          const occF = (snap.occupancy/100).toFixed(2) + '%';
+          const dscrF = (snap.dscr/100).toFixed(2) + 'x';
+          addBubble(
+            `Here's the current financial snapshot for <strong>${snap.assetId}</strong>:
+            <div class="ib-mini-cards">
+              <div class="ib-mini-card"><div class="label">NOI</div><div class="val" style="color:#5ecb6f">${noiF}</div></div>
+              <div class="ib-mini-card"><div class="label">Occupancy</div><div class="val" style="color:#7eb87a">${occF}</div></div>
+              <div class="ib-mini-card"><div class="label">DSCR</div><div class="val" style="color:#e8b84b">${dscrF}</div></div>
+            </div>`,
+            'assistant'
+          );
+        }, 1200);
+      }
+
+      send.onclick = respond;
+      input.addEventListener('keydown', e => { if (e.key === 'Enter') respond(); });
+    })();
   </script>
 </body>
 </html>
