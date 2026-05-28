@@ -5,12 +5,14 @@
   "scripts": {
     "compile": "hardhat compile",
     "deploy": "hardhat run scripts/deploy.js --network baseSepolia",
-    "node": "hardhat node"
+    "node": "hardhat node",
+    "dev": "serve frontend"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^4.0.0",
     "@openzeppelin/contracts": "^5.0.0",
-    "hardhat": "^2.19.0"
+    "hardhat": "^2.19.0",
+    "serve": "^14.2.6"
   },
   "dependencies": {
     "dotenv": "^17.4.2"
