@@ -827,9 +827,9 @@
           </p>
           <div style="display:flex; gap:12px; align-items:center;">
             <select id="tokenIdSelect" style="padding:10px 16px; border-radius:8px; border:1px solid var(--border-subtle); background:var(--bg-card); color:var(--text-primary); font-family:var(--font-mono); font-size:13px; outline:none;">
-              <option value="1">Token 1 (QM1-001 Hotel Feeling)</option>
-              <option value="2">Token 2 (QM1-002 Plaza Comercial Alcala)</option>
-              <option value="3">Token 3 (QM1-003 Bodega Industrial JHC)</option>
+              <option value="0">Token 0 (QM1-001 Hotel Feeling)</option>
+              <option value="1">Token 1 (QM1-002 Plaza Comercial Alcala)</option>
+              <option value="2">Token 2 (QM1-003 Bodega Industrial JHC)</option>
             </select>
             <button class="btn btn-query" id="queryBtn" onclick="queryBlockchain()">
               <span id="queryBtnContent">🔎 Query Blockchain State</span>
@@ -899,8 +899,8 @@
     // CONFIGURATION
     // =====================================================================
 
-    // Deployed on Base Sepolia Testnet
-    const CONTRACT_ADDRESS = "0xCbE0F785EDc2d823a44d5DB44C8099407000B843";
+    // Deployed on Base Sepolia Testnet (Real Estate Portfolio)
+    const CONTRACT_ADDRESS = "0xD30C5A6d24E5c1E254fC43928172793a96Dac057";
 
     // Base Sepolia Public RPC
     const RPC_URL = "https://sepolia.base.org";
