@@ -1543,13 +1543,8 @@
     // Initialize the contract badge
     document.addEventListener("DOMContentLoaded", () => {
       const badge = document.getElementById("contractBadge");
-      if (CONTRACT_ADDRESS === "0x0000000000000000000000000000000000000000") {
-        badge.textContent = "⚠️ Set CONTRACT_ADDRESS";
-        badge.style.color = "var(--accent-amber)";
-        badge.style.background = "var(--accent-amber-dim)";
-      } else {
-        badge.textContent = CONTRACT_ADDRESS.slice(0, 6) + "…" + CONTRACT_ADDRESS.slice(-4);
-      }
+      badge.innerHTML = `<a href="https://sepolia.basescan.org/address/${CONTRACT_ADDRESS}" target="_blank" style="color:var(--accent-emerald); text-decoration:none;">${CONTRACT_ADDRESS.slice(0, 6)}…${CONTRACT_ADDRESS.slice(-4)} ↗</a>`;
+      log("[INIT] Quantum On-Chain Terminal initialized. Awaiting user action…", "info");
     });
 
     // =====================================================================

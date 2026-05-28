@@ -1,0 +1,14 @@
+<svg width="180" height="40" viewBox="0 0 180 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g transform="translate(20, 20) rotate(45)">
+    <!-- Top-Left / Top capsule -->
+    <rect x="-5" y="-14" width="10" height="11" rx="4" fill="#BACFBA"/>
+    <!-- Bottom-Left / Left capsule -->
+    <rect x="-14" y="-5" width="11" height="10" rx="4" fill="#BACFBA"/>
+    <!-- Bottom / Bottom capsule -->
+    <rect x="-5" y="3" width="10" height="11" rx="4" fill="#BACFBA"/>
+    <!-- Right / Bright circle -->
+    <circle cx="7" cy="0" r="5" fill="#A4EC44"/>
+  </g>
+  <text x="48" y="29" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="28" font-weight="600" letter-spacing="-0.5" fill="#FFFFFF">claira</text>
+  <!-- The dot on the i in claira is sometimes distinctive, but standard sans-serif is close enough for a POC -->
+</svg>
